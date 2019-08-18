@@ -48,7 +48,7 @@ func (c *ZlispConfig) DefineFlags() {
 // call c.ValidateConfig() after myflags.Parse()
 func (c *ZlispConfig) ValidateConfig() error {
 	if c.Prompt == "" {
-		c.Prompt = "zygo> "
+		c.Prompt = "zig :|> "
 	}
 	return nil
 }
