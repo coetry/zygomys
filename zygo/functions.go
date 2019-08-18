@@ -51,7 +51,6 @@ func CompareFunction(env *Zlisp, name string, args []Sexp) (Sexp, error) {
 	case "!=":
 		cond = res != 0
 	}
-
 	return &SexpBool{Val: cond}, nil
 }
 
@@ -932,6 +931,7 @@ func AllBuiltinFunctions() map[string]ZlispUserFunction {
 		EncodingFunctions(),
 		SystemFunctions(),
 		ReflectionFunctions(),
+		CustomFunctions(),
 	)
 }
 
@@ -1084,6 +1084,12 @@ func SystemFunctions() map[string]ZlispUserFunction {
 		"setenv":    GetEnvFunction,
 		"getenv":    GetEnvFunction,
 		// not done "_call":     CallZMethodOnRecordFunction,
+	}
+}
+
+func CustomFunctions() map[string]ZlispUserFunction {
+	return map[string]ZlispUserFunction{
+		"yo": YoFunction,
 	}
 }
 
@@ -1784,4 +1790,8 @@ func AsUint64Function(env *Zlisp, name string, args []Sexp) (Sexp, error) {
 
 	}
 	return &SexpUint64{Val: val}, nil
+}
+
+func YoFunction(env *Zlisp, name string, args []Sexp) (Sexp, error) {
+	return &SexpStr{S: "yo yo what's good?"}, nil
 }
