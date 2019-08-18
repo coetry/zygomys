@@ -16,6 +16,10 @@ func usage(myflags *flag.FlagSet) {
 	os.Exit(1)
 }
 
+func YoFunction(env *Zlisp, name string, args []Sexp) (Sexp, error) {
+	return &SexpStr{Val: "yo"}, nil
+}
+
 func main() {
 	cfg := zygo.NewZlispConfig("zig")
 	cfg.DefineFlags()
@@ -34,5 +38,10 @@ func main() {
 	}
 
 	// the library does all the heavy lifting.
-	zygo.ReplMain(cfg)
+	// zygo.ReplMain(cfg)
+	env := zygo.NewZlisp()
+	env.AddFunction("yo", YoFunction)
+
+	zygo.Repl(env, cfg)
+
 }
